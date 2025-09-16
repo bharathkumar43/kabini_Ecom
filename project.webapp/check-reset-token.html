@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Reset Token Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ffeaa7;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #bee5eb;
+        }
+        input, button {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .token-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .step h3 {
+            margin: 0 0 10px 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Check Reset Token Status</h1>
+    
+    <div class="container">
+        <div class="info">
+            <strong>📋 How to get your reset token:</strong><br>
+            1. Look at your reset password URL in the browser address bar<br>
+            2. Find the part after "?token="<br>
+            3. Copy that token and paste it below<br>
+            <br>
+            <strong>Example:</strong><br>
+            If your URL is: <code>http://localhost:5173/reset-password?token=abc123def456</code><br>
+            Then your token is: <code>abc123def456</code>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Check Your Reset Token</h2>
+        
+        <div id="status"></div>
+        
+        <input type="text" id="token" placeholder="Paste your reset token here" style="font-family: monospace;">
+        <button onclick="checkToken()">Check Token Status</button>
+        
+        <div id="token-info" class="token-info" style="display: none;"></div>
+        <div id="log" class="log"></div>
+    </div>
+
+    <div class="container">
+        <div class="step">
+            <h3>What This Tool Does</h3>
+            <p>This tool will check if your reset token is:</p>
+            <ul>
+                <li><strong>Valid</strong> - Token exists and is not expired</li>
+                <li><strong>Expired</strong> - Token exists but has passed its expiration time</li>
+                <li><strong>Used</strong> - Token was already used to reset password</li>
+                <li><strong>Invalid</strong> - Token doesn't exist in database</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>What to Do Based on Results</h3>
+            <p><strong>If token is Valid:</strong> You can use it to reset your password</p>
+            <p><strong>If token is Expired/Used/Invalid:</strong> You need to request a new password reset</p>
+        </div>
+    </div>
+
+    <script>
+        function log(message) {
+            const logElement = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.textContent += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        function setStatus(message, type = 'info') {
+            const statusElement = document.getElementById('status');
+            statusElement.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        function showTokenInfo(info) {
+            const tokenInfoElement = document.getElementById('token-info');
+            tokenInfoElement.innerHTML = `
+                <strong>Token Information:</strong><br>
+                Token: ${info.token}<br>
+                User ID: ${info.user_id || 'N/A'}<br>
+                Created: ${info.created_at || 'N/A'}<br>
+                Expires: ${info.expires_at || 'N/A'}<br>
+                Used: ${info.used || 'N/A'}<br>
+                Status: ${info.status || 'N/A'}
+            `;
+            tokenInfoElement.style.display = 'block';
+        }
+
+        async function checkToken() {
+            const token = document.getElementById('token').value.trim();
+            
+            if (!token) {
+                setStatus('Please enter a token to check', 'error');
+                return;
+            }
+            
+            setStatus('Checking token status...', 'warning');
+            log(`Checking token: ${token.substring(0, 10)}...`);
+            
+            try {
+                // Test the token by trying to reset password with a dummy password
+                log('Testing token validity...');
+                const response = await fetch('/api/auth/reset-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        token: token, 
+                        newPassword: 'TestPassword123!' 
+                    })
+                });
+                
+                const data = await response.json();
+                log(`Response status: ${response.status}`);
+                log(`Response data: ${JSON.stringify(data, null, 2)}`);
+                
+                if (response.ok) {
+                    setStatus('✅ Token is VALID and working! You can use it to reset your password.', 'success');
+                    log('✅ Token is valid and can be used for password reset');
+                    showTokenInfo({
+                        token: token.substring(0, 10) + '...',
+                        status: 'VALID',
+                        message: 'Token is working correctly'
+                    });
+                } else {
+                    if (data.error === 'Invalid or expired reset token') {
+                        setStatus('❌ Token is INVALID or EXPIRED. You need to request a new password reset.', 'error');
+                        log('❌ Token is invalid or expired');
+                        showTokenInfo({
+                            token: token.substring(0, 10) + '...',
+                            status: 'INVALID/EXPIRED',
+                            message: 'Token cannot be used'
+                        });
+                    } else if (data.error === 'Token and new password are required') {
+                        setStatus('⚠️ Token format issue. Please check the token you entered.', 'warning');
+                        log('⚠️ Token format issue');
+                    } else {
+                        setStatus(`⚠️ Token check result: ${data.error}`, 'warning');
+                        log(`Token check result: ${data.error}`);
+                    }
+                }
+                
+            } catch (error) {
+                setStatus('❌ Network error. Make sure the backend server is running on port 5000.', 'error');
+                log(`Network error: ${error.message}`);
+            }
+        }
+
+        // Auto-extract token from URL if present
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            if (token) {
+                document.getElementById('token').value = token;
+                log('Token extracted from URL automatically');
+            }
+            log('Page loaded. Ready to check token status.');
+            log('Backend server should be running on port 5000.');
+        };
+    </script>
+</body>
+</html>

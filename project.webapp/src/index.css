@@ -1,0 +1,1033 @@
+/* Import responsive scaling utilities */
+@import './responsive-scaling.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global scaling fix for 100% zoom */
+html {
+  font-size: 14px; /* Reduce base font size from default 16px */
+}
+
+body {
+  @apply bg-white text-black font-sans;
+  background: white;
+  min-height: 100vh;
+  transition: background 0.5s;
+  font-size: 0.875rem; /* 14px equivalent */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Responsive scaling is now handled through proper component sizing */
+
+/* Responsive scaling for different zoom levels */
+@media screen and (min-resolution: 120dpi) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media screen and (min-resolution: 144dpi) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Global scrollbar styling (subtle, thin, neutral) */
+* {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #9ca3af transparent; /* thumb track */
+}
+
+/* Authentication popup styling */
+body {
+  background-color: white !important;
+}
+
+/* Ensure authentication modals and popups have white background */
+.auth-popup,
+.auth-modal,
+[data-testid="google-signin"],
+[data-testid="microsoft-signin"] {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Override any potential blue backgrounds in authentication flows */
+.google-signin-popup,
+.microsoft-signin-popup,
+.oauth-popup {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Additional styling to ensure white backgrounds for OAuth popups */
+iframe[src*="accounts.google.com"],
+iframe[src*="login.microsoftonline.com"],
+div[role="dialog"],
+div[class*="popup"],
+div[class*="modal"] {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Ensure the main container doesn't have blue background */
+.main-container,
+.app-container,
+.auth-container {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Ensure loading screens have white backgrounds */
+.loading-screen,
+.auth-loading,
+[class*="loading"] {
+  background-color: white !important;
+  background: white !important;
+}
+
+/* Override any gradient backgrounds that might appear blue */
+.bg-gradient-to-br,
+.bg-gradient-to-r,
+.bg-gradient-to-l {
+  background: white !important;
+  background-color: white !important;
+}
+:::-webkit-scrollbar {
+  width: 6px; /* vertical thickness */
+  height: 6px; /* horizontal thickness */
+  background: transparent; /* transparent track */
+}
+:::-webkit-scrollbar-track {
+  background: transparent;
+}
+:::-webkit-scrollbar-thumb {
+  background: #9ca3af; /* neutral gray thumb */
+  border-radius: 9999px;
+}
+:::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+a {
+  @apply text-black hover:underline transition-colors duration-200;
+}
+
+/* FORCE ALL BLUE TEXT TO BLACK */
+.text-blue-600,
+.text-blue-700,
+.text-blue-800,
+.text-blue-900,
+.text-blue-500,
+.text-blue-400,
+.text-blue-100,
+.text-blue-200,
+.text-blue-300,
+.text-blue-50 {
+  color: #000000 !important;
+}
+
+/* Override ANY element with blue text */
+[class*="text-blue-"] {
+  color: #000000 !important;
+}
+
+/* Override blue text in specific components */
+div[class*="text-blue-"],
+span[class*="text-blue-"],
+p[class*="text-blue-"],
+a[class*="text-blue-"],
+label[class*="text-blue-"],
+h1[class*="text-blue-"],
+h2[class*="text-blue-"],
+h3[class*="text-blue-"],
+h4[class*="text-blue-"],
+h5[class*="text-blue-"],
+h6[class*="text-blue-"] {
+  color: #000000 !important;
+}
+
+/* Keep button text white */
+button[class*="bg-blue-"],
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.bg-blue-500,
+.bg-blue-400,
+.bg-blue-300,
+.bg-blue-200,
+.bg-blue-100,
+.bg-blue-50 {
+  color: white !important;
+}
+
+input, textarea, select {
+  @apply bg-white text-black border border-grey-400 rounded px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200; /* Reduced padding */
+  font-size: 0.875rem; /* 14px */
+}
+
+/* Additional aggressive overrides for any remaining blue text */
+.text-blue-600,
+.text-blue-700,
+.text-blue-800,
+.text-blue-900,
+.text-blue-500,
+.text-blue-400,
+.text-blue-100,
+.text-blue-200,
+.text-blue-300,
+.text-blue-50,
+[class*="text-blue-"] {
+  color: #000000 !important;
+}
+
+/* Override any element that might have blue text */
+.text-blue-600,
+.text-blue-700,
+.text-blue-800,
+.text-blue-900,
+.text-blue-500,
+.text-blue-400,
+.text-blue-100,
+.text-blue-200,
+.text-blue-300,
+.text-blue-50 {
+  color: #000000 !important;
+}
+
+/* FORCE ALL INPUT TEXT TO BLACK */
+input,
+textarea,
+select,
+input[type="text"],
+input[type="url"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  color: #000000 !important;
+}
+
+/* FORCE ALL GENERATED CONTENT TEXT TO BLACK */
+.generated-questions,
+.generated-answers,
+.question-text,
+.answer-text,
+.faq-question,
+.faq-answer,
+[class*="question"],
+[class*="answer"],
+[class*="faq"] {
+  color: #000000 !important;
+}
+
+/* FORCE ALL URL TEXT TO BLACK */
+a[href],
+a[href*="http"],
+a[href*="https"],
+.url-text,
+.link-text {
+  color: #000000 !important;
+}
+
+/* FORCE ALL TEXT IN CONTAINERS TO BLACK */
+.text-container,
+.content-container,
+.question-container,
+.answer-container,
+.faq-container {
+  color: #000000 !important;
+}
+
+/* Exception: Keep button backgrounds with white text */
+button[class*="bg-blue-"],
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.bg-blue-500,
+.bg-blue-400,
+.bg-blue-300,
+.bg-blue-200,
+.bg-blue-100,
+.bg-blue-50 {
+  color: white !important;
+}
+
+/* Force all text elements to black */
+p, span, div, a, label, h1, h2, h3, h4, h5, h6, input, textarea, select {
+  color: #000000 !important;
+}
+
+/* Exception: Keep sidebar navigation text visible */
+.nav-item-responsive,
+.nav-item-responsive span,
+.nav-item-responsive div,
+.nav-item-responsive a,
+.nav-item-responsive button,
+.sidebar-nav,
+.sidebar-nav span,
+.sidebar-nav div,
+.sidebar-nav a,
+[class*="nav-item"],
+[class*="sidebar"],
+nav button,
+nav button span,
+nav button div,
+nav button a {
+  color: #000000 !important;
+}
+
+/* Exception: Keep active navigation item text visible */
+.nav-item-responsive.active,
+.nav-item-responsive.active span,
+.nav-item-responsive.active div,
+.nav-item-responsive.active a,
+.nav-item-responsive.active button,
+.sidebar-nav .active,
+.sidebar-nav .active span,
+.sidebar-nav .active div,
+.sidebar-nav .active a,
+nav button.active,
+nav button.active span,
+nav button.active div,
+nav button.active a {
+  color: #000000 !important;
+}
+
+/* Force navigation text to be visible */
+nav button {
+  color: #000000 !important;
+}
+
+/* Force all navigation elements to have black text */
+nav * {
+  color: #000000 !important;
+}
+
+/* Exception: Keep button text white */
+button,
+button[class*="bg-blue-"],
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.bg-blue-500,
+.bg-blue-400,
+.bg-blue-300,
+.bg-blue-200,
+.bg-blue-100,
+.bg-blue-50,
+.btn-primary,
+.btn-blue,
+.primary-button,
+.generate-button,
+.analyze-button {
+  color: white !important;
+}
+
+/* Exception: Keep specific button text visible */
+.new-analysis-button,
+.expand-button,
+.copy-button,
+.reanalyze-button,
+[class*="new-analysis"],
+[class*="expand"],
+[class*="copy"],
+[class*="reanalyze"],
+button[class*="new"],
+button[class*="expand"],
+button[class*="copy"],
+button[class*="reanalyze"] {
+  color: #000000 !important;
+}
+
+/* Force all buttons to have visible text */
+button {
+  color: #000000 !important;
+}
+
+/* Exception: Keep blue background buttons with white text */
+button[class*="bg-blue-"],
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-800,
+.bg-blue-900,
+.bg-blue-500,
+.bg-blue-400,
+.bg-blue-300,
+.bg-blue-200,
+.bg-blue-100,
+.bg-blue-50 {
+  color: white !important;
+}
+
+/* Specific button visibility fixes */
+button[class*="text-black"],
+button[class*="text-gray"],
+button[class*="hover:bg-gray"],
+button[class*="border-gray"],
+button[class*="bg-white"] {
+  color: #000000 !important;
+}
+
+/* Force specific button classes to be visible */
+button[title*="Copy"],
+button[title*="Expand"],
+button[title*="Collapse"],
+button[title*="Generate"],
+button[title*="New Analysis"] {
+  color: #000000 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  @apply text-grey-400;
+}
+
+/* Hide default Edge/IE password reveal and clear icons to avoid double eye buttons */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none !important;
+  width: 0;
+  height: 0;
+}
+
+button {
+  @apply bg-blue-600 text-white font-bold rounded px-3 py-1.5 transition-all duration-200 shadow-lg relative overflow-hidden; /* Reduced padding */
+  font-size: 0.875rem; /* 14px */
+}
+button:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(37, 99, 235, 0.12); /* Blue-600 with opacity */
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+  z-index: 0;
+}
+button:active:after {
+  width: 200px;
+  height: 200px;
+}
+button:hover {
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.4), 0 2px 8px rgba(37, 99, 235, 0.2); /* Blue-600 shadows */
+  color: white;
+  background: #1d4ed8; /* Blue-700 on hover */
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-xl p-4 border border-grey-200 backdrop-blur-md; /* Reduced padding from p-6 */
+  background: white;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.2), 0 2px 8px rgba(37, 99, 235, 0.1); /* Blue-600 shadows */
+}
+
+/* PERFECT ALIGNMENT FIXES - Enhanced Version */
+
+/* Logo and header alignment fixes - More precise */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  height: 3.5rem; /* Fixed height for consistency */
+}
+
+.logo-icon {
+  width: 2rem; /* 32px - Fixed size */
+  height: 2rem; /* 32px - Fixed size */
+  flex-shrink: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: linear-gradient(to right, #2563eb, #1d4ed8) !important;
+  border-radius: 0.5rem !important;
+}
+
+.logo-icon svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: white !important;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+
+/* Ensure all icons are visible */
+svg {
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+/* Specific icon visibility fixes */
+.lucide-icon,
+[class*="lucide"] {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.logo-text {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  color: #000000; /* Black text */
+  letter-spacing: 0.025em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Header alignment fixes - More precise */
+.header-responsive {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.1); /* Blue-600 border */
+  height: 4rem; /* Fixed height for consistency */
+  box-sizing: border-box;
+}
+
+/* Sidebar navigation alignment - PERFECT ALIGNMENT */
+.nav-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding: 0 0.75rem;
+  flex: 1;
+}
+
+.nav-item-responsive {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  height: 2.75rem; /* Fixed height for perfect alignment */
+  box-sizing: border-box;
+  position: relative;
+  background: transparent;
+  color: #000000; /* Black text */
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure proper sidebar alignment - PERFECT FIT */
+.sidebar-responsive {
+  width: 16rem !important; /* 256px - Increased from 224px for better text visibility */
+  min-height: 100vh;
+  position: fixed !important; /* Fixed position to keep sidebar static on all pages */
+  top: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: white;
+  border-right: 1px solid #e5e7eb; /* Grey-200 border */
+  box-shadow: 2px 0 8px rgba(37, 99, 235, 0.1); /* Blue-600 shadow */
+}
+
+/* Content area proper alignment - FULL WIDTH LAYOUT */
+.content-responsive {
+  margin-left: 16.5rem !important; /* 256px sidebar + 0.5rem gap = 264px total */
+  width: calc(100% - 16.5rem) !important;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  max-width: none; /* Remove width constraint for full page width */
+  min-height: 100vh; /* Ensure content area takes full height */
+}
+
+.main-content-responsive {
+  padding: 2rem 0; /* Remove horizontal padding for full width */
+  margin-left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left align content for proper logo alignment */
+  text-align: left; /* Left align text for better readability */
+  background: white; /* Clean white background */
+  min-height: calc(100vh - 4rem - 3rem); /* Account for header and footer */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  max-width: 100%; /* Ensure content doesn't exceed container */
+}
+
+/* Main content container - FULL WIDTH LAYOUT */
+.main-content-container {
+  width: 100%;
+  max-width: none; /* Remove width constraint for full page width */
+  margin: 0; /* Remove centering for full width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left align content */
+  padding: 0; /* Remove padding for full width */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Page content - CONSISTENT ALIGNMENT POSITIONING */
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left align content */
+  width: 100%;
+  text-align: left; /* Left align text */
+  max-width: 100%;
+  padding: 0; /* Remove padding since parent handles it */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.page-title {
+  text-align: left; /* Left align text */
+  margin-bottom: 2rem; /* Consistent spacing */
+  width: 100%;
+  font-size: 2rem; /* Slightly larger for better hierarchy */
+  font-weight: 700;
+  color: #000000; /* Black text */
+  padding: 0;
+}
+
+.page-description {
+  text-align: left; /* Left align text */
+  margin-bottom: 3rem; /* Increased spacing for better separation */
+  max-width: 700px; /* Optimal width for readability */
+  width: 100%;
+  color: #6b7280; /* Grey-600 */
+  font-size: 1.125rem; /* Slightly larger for better readability */
+  line-height: 1.6;
+  padding: 0;
+}
+
+/* Card grid alignment - CONSISTENT GRID LAYOUT */
+.card-grid-responsive {
+  display: grid;
+  gap: 2rem; /* Consistent gap */
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  align-items: start;
+  justify-items: stretch;
+  width: 100%;
+  padding: 0; /* Remove padding since parent handles it */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Form alignment - CONSISTENT LAYOUT */
+.form-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Consistent gap */
+  align-items: flex-start; /* Left align content */
+  width: 100%;
+  max-width: 800px; /* Reasonable max-width for forms */
+  padding: 0; /* Remove padding since parent handles it */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.input-group-responsive {
+  display: flex;
+  gap: 1rem; /* Consistent gap */
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start; /* Left align content */
+  padding: 0; /* Remove padding since parent handles it */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Button group alignment - CONSISTENT LAYOUT */
+.button-group-responsive {
+  display: flex;
+  gap: 1rem; /* Consistent gap */
+  align-items: center;
+  justify-content: flex-start; /* Left align content */
+  flex-wrap: wrap;
+  padding: 0; /* Remove padding since parent handles it */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Enhanced sidebar button alignment */
+.sidebar button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Professional icon sizing and styling with BLACK COLOR */
+.nav-item-responsive svg {
+  width: 1.25rem; /* 20px - Professional icon size */
+  height: 1.25rem; /* 20px - Professional icon size */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000; /* Black text */
+  transition: all 0.2s ease;
+}
+
+.nav-item-responsive span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem; /* 20px - Professional icon size */
+  height: 1.25rem; /* 20px - Professional icon size */
+  flex-shrink: 0;
+  color: #000000; /* Black text */
+}
+
+/* Active navigation item styling - Professional appearance with BLACK TEXT */
+.nav-item-responsive.active {
+  background: #eff6ff; /* Blue-50 instead of grey-100 */
+  color: #000000; /* Black text */
+  border-left: 3px solid #3b82f6; /* Blue-500 instead of grey-600 */
+}
+
+.nav-item-responsive.active svg,
+.nav-item-responsive.active span {
+  color: #000000; /* Black text */
+}
+
+/* Hover effects for navigation - Professional appearance with BLACK TEXT */
+.nav-item-responsive:hover {
+  background: #dbeafe; /* Blue-100 instead of grey-50 */
+  color: #000000; /* Black text */
+  transform: translateX(2px);
+}
+
+.nav-item-responsive:hover svg,
+.nav-item-responsive:hover span {
+  color: #000000; /* Black text */
+}
+
+/* User profile section alignment */
+.user-profile-section {
+  padding: 1rem 0.75rem;
+  border-top: 1px solid rgba(37, 99, 235, 0.1); /* Blue-600 border */
+  margin-top: auto;
+  background: #f9fafb; /* Grey-50 */
+}
+
+.user-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem; /* Reduced margin for better spacing */
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #2563eb; /* Blue-600 instead of black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.user-avatar svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.user-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #000000; /* Black text */
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: #6b7280; /* Grey-600 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Logout button styling */
+.logout-button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #2563eb; /* Blue-600 instead of black */
+  border: 1px solid #2563eb; /* Blue-600 instead of black */
+  border-radius: 0.5rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.logout-button:hover {
+  background: #1d4ed8; /* Blue-700 instead of grey-800 */
+  border-color: #1d4ed8; /* Blue-700 instead of grey-800 */
+  color: #ffffff;
+}
+
+.logout-button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Left align all page content - FIXED LAYOUT */
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
+}
+
+.page-title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.page-description {
+  text-align: left;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+/* Media queries for responsive design - PERFECT ALIGNMENT with REDUCED SIDEBAR SPACING */
+@media (max-width: 1024px) {
+  .sidebar-responsive {
+    width: 16rem !important; /* 256px - Increased for better text visibility on tablet */
+    position: fixed !important; /* Keep sidebar fixed on tablet */
+    top: 0;
+    left: 0;
+    z-index: 50;
+  }
+  
+  .content-responsive {
+    margin-left: 16.5rem !important; /* 256px sidebar + 0.5rem gap = 264px total */
+    width: calc(100% - 16.5rem) !important;
+  }
+  
+  .main-content-responsive {
+    margin-left: 0;
+    width: 100%;
+    padding: 1.25rem 0.5rem; /* Reduced left/right padding for tablet */
+  }
+  
+  .nav-item-responsive {
+    padding: 0.625rem 0.875rem;
+    height: 2.5rem;
+  }
+  
+  .nav-item-responsive svg,
+  .nav-item-responsive span {
+    width: 1.125rem; /* 18px for tablet */
+    height: 1.125rem; /* 18px for tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-responsive {
+    width: 100% !important;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+  }
+  
+  .content-responsive {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  .main-content-responsive {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem 0.5rem; /* Reduced left/right padding for mobile */
+  }
+  
+  .header-responsive {
+    padding: 0.75rem 1rem; /* Reduced padding for mobile */
+    height: 3.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1rem; /* 16px */
+  }
+  
+  .nav-item-responsive {
+    padding: 0.75rem 1rem;
+    height: 3rem;
+  }
+  
+  .nav-item-responsive svg,
+  .nav-item-responsive span {
+    width: 1.375rem; /* 22px for mobile */
+    height: 1.375rem; /* 22px for mobile */
+  }
+}
+
+/* High DPI displays - perfect alignment with REDUCED SIDEBAR SPACING */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .nav-item-responsive {
+    height: 2.875rem; /* Slightly larger for high DPI */
+  }
+  
+  .logo-icon {
+    width: 2.125rem;
+    height: 2.125rem;
+  }
+  
+  .nav-item-responsive svg,
+  .nav-item-responsive span {
+    width: 1.375rem; /* 22px for high DPI */
+    height: 1.375rem; /* 22px for high DPI */
+  }
+}
+
+/* Ultra-wide screens - perfect alignment with REDUCED SIDEBAR SPACING */
+@media (min-width: 1920px) {
+  .sidebar-responsive {
+    width: 18rem !important; /* 288px for ultra-wide - Better proportions for large screens */
+    position: fixed !important; /* Keep sidebar fixed on ultra-wide screens */
+    top: 0;
+    left: 0;
+    z-index: 50;
+  }
+  
+  .content-responsive {
+    margin-left: 18.5rem !important; /* 288px sidebar + 0.5rem gap = 296px total */
+    width: calc(100% - 18.5rem) !important;
+  }
+  
+  .main-content-responsive {
+    margin-left: 0;
+    width: 100%;
+    padding: 2rem 0.75rem; /* Reduced left/right padding for ultra-wide */
+  }
+  
+  .nav-item-responsive {
+    height: 3rem; /* Larger for ultra-wide */
+    padding: 0.875rem 1.25rem;
+  }
+  
+  .nav-item-responsive svg,
+  .nav-item-responsive span {
+    width: 1.5rem; /* 24px for ultra-wide */
+    height: 1.5rem; /* 24px for ultra-wide */
+  }
+}
+
+/* Enhanced Content Layout Classes */
+.content-section {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.content-section:last-child {
+  margin-bottom: 0;
+}
+
+.content-card {
+  background: white;
+  border: 1px solid #e5e7eb; /* Grey-200 */
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px 0 rgba(37, 99, 235, 0.1); /* Blue-600 shadow */
+  margin-bottom: 2rem;
+}
+
+.content-card:last-child {
+  margin-bottom: 0;
+}
+
+.content-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.content-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000; /* Black text */
+  margin-bottom: 0.5rem;
+}
+
+.content-card-description {
+  color: #6b7280; /* Grey-600 */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.content-card-body {
+  margin-bottom: 1.5rem;
+}
+
+.content-card-footer {
+  border-top: 1px solid #f3f4f6; /* Grey-100 */
+  padding-top: 1.5rem;
+}
+
+/* Consistent spacing utilities */
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.space-y-8 > * + * {
+  margin-top: 2rem;
+}
+
+.space-y-12 > * + * {
+  margin-top: 3rem;
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #ffeaa7;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #bee5eb;
+        }
+        input, button {
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .alert-box {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .alert-box.error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+        .alert-box.success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+        .alert-box .icon {
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .alert-box .content h3 {
+            margin: 0 0 5px 0;
+            font-weight: 600;
+        }
+        .alert-box .content p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .example {
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+        .example h4 {
+            margin: 0 0 10px 0;
+            color: #374151;
+        }
+        .example .email {
+            font-family: monospace;
+            background: #f3f4f6;
+            padding: 5px 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📧 Email Validation Test</h1>
+    
+    <div class="container">
+        <div class="info">
+            <strong>📋 How Email Validation Works:</strong><br>
+            The forgot password page now shows a red alert box when the email is invalid and a green success box when the email is valid.
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Test Email Validation</h2>
+        
+        <div id="status"></div>
+        
+        <input type="email" id="email" placeholder="Enter email address to test validation" value="">
+        <button onclick="testEmailValidation()">Test Email Validation</button>
+        
+        <div id="validation-result"></div>
+    </div>
+
+    <div class="container">
+        <h2>Email Validation Examples</h2>
+        
+        <div class="examples">
+            <div class="example">
+                <h4>✅ Valid Emails</h4>
+                <div class="email">user@example.com</div>
+                <div class="email">test.email@domain.co.uk</div>
+                <div class="email">user+tag@example.org</div>
+                <div class="email">firstname.lastname@company.com</div>
+            </div>
+            
+            <div class="example">
+                <h4>❌ Invalid Emails</h4>
+                <div class="email">invalid-email</div>
+                <div class="email">@example.com</div>
+                <div class="email">user@</div>
+                <div class="email">user..name@example.com</div>
+                <div class="email">user@example</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Features Added</h2>
+        <ul>
+            <li><strong>Red Alert Box:</strong> Shows when email is invalid with specific error message</li>
+            <li><strong>Green Success Box:</strong> Shows when email is valid and ready to use</li>
+            <li><strong>Real-time Validation:</strong> Validates email as you type</li>
+            <li><strong>Input Border:</strong> Email input border turns red when invalid</li>
+            <li><strong>Submit Button:</strong> Disabled when email is invalid</li>
+            <li><strong>Professional Validation:</strong> Uses comprehensive email validation rules</li>
+        </ul>
+    </div>
+
+    <script>
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function getEmailValidationMessage(email) {
+            if (!email.trim()) {
+                return 'Please enter your email address';
+            }
+            
+            if (!email.includes('@')) {
+                return 'Email must contain @ symbol';
+            }
+            
+            if (email.startsWith('@') || email.endsWith('@')) {
+                return 'Email cannot start or end with @ symbol';
+            }
+            
+            if (email.includes('..')) {
+                return 'Email cannot contain consecutive dots';
+            }
+            
+            if (!email.includes('.')) {
+                return 'Email must contain a domain extension';
+            }
+            
+            if (email.split('@')[1] && !email.split('@')[1].includes('.')) {
+                return 'Domain must contain a dot (e.g., .com, .org)';
+            }
+            
+            if (!validateEmail(email)) {
+                return 'Please enter a valid email address format';
+            }
+            
+            return null;
+        }
+
+        function showAlertBox(message, type) {
+            const resultDiv = document.getElementById('validation-result');
+            
+            if (type === 'error') {
+                resultDiv.innerHTML = `
+                    <div class="alert-box error">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h3>Invalid Email Address</h3>
+                            <p>${message}</p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'success') {
+                resultDiv.innerHTML = `
+                    <div class="alert-box success">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h3>Valid Email Address</h3>
+                            <p>Email format is correct. You can proceed with password reset.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function testEmailValidation() {
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email) {
+                setStatus('Please enter an email address to test', 'warning');
+                document.getElementById('validation-result').innerHTML = '';
+                return;
+            }
+            
+            const errorMessage = getEmailValidationMessage(email);
+            
+            if (errorMessage) {
+                setStatus('Email validation failed', 'error');
+                showAlertBox(errorMessage, 'error');
+            } else {
+                setStatus('Email validation passed', 'success');
+                showAlertBox('', 'success');
+            }
+        }
+
+        function setStatus(message, type = 'info') {
+            const statusElement = document.getElementById('status');
+            statusElement.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        // Real-time validation as user types
+        document.getElementById('email').addEventListener('input', function() {
+            const email = this.value.trim();
+            
+            if (!email) {
+                document.getElementById('validation-result').innerHTML = '';
+                return;
+            }
+            
+            const errorMessage = getEmailValidationMessage(email);
+            
+            if (errorMessage) {
+                showAlertBox(errorMessage, 'error');
+            } else {
+                showAlertBox('', 'success');
+            }
+        });
+
+        // Auto-test on page load
+        window.onload = function() {
+            setStatus('Enter an email address to test the validation. Try invalid emails like "invalid" or "user@" to see the red alert box.', 'info');
+        };
+    </script>
+</body>
+</html>
